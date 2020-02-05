@@ -1,0 +1,29 @@
+nav {
+    margin-bottom: 50px;
+}
+
+.input-group {
+    width: 20% !important;
+}
+
+#balance {
+    margin: 0 auto;
+    width: 30%;
+    border: 2px solid black;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+form {
+    margin: 0 auto;
+    width: 30%;
+    border: 2px solid black;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+#transferBtn {
+    margin-top: 15px;
+}
+
