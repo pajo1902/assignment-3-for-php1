@@ -1,14 +1,16 @@
 
 document.addEventListener("DOMContentLoaded", function () {
+
   $(document).ready(function() {
     $.ajax({
-      url: 'http://localhost:8888/webb19-bank/public/api/readUsers.php',
+      url: 'http://localhost:8888/assignment-3-for-php1/public/api/readUsers.php',
       success: function(parr) {
         console.log("SUCCESS get");
-        var userObj;
-        let userObjArray = [];
         
-        //denna funktionen som jag återanvändre loopar igenom alla users och printar ut dom var beroende på vad jag slänger in i paramatern
+        var userObj;
+        var userObjArray = [];
+        
+        //denna funktionen loopar igenom alla users och printar ut dom var beroende på vad jag slänger in i paramatern
         function printAllUsers(output) {
           for (let i = 0; i < parr.data.length; i++) {
             userObj = parr.data[i];
@@ -25,16 +27,16 @@ document.addEventListener("DOMContentLoaded", function () {
         
         $("#personBtn").click(function() {
           let person = document.querySelector('#personInput').value;
-          let userObj = userObjArray[person];
+          userObj = userObjArray[person];
           $("#balanceOutput").empty();
-          $("#balanceOutput").append(`<p>${userObj.balance}</p>`);
+          $("#balanceOutput").append(`<p>${userObj.balance} SEK</p>`);
           $("#from_account").val(userObj.account_id);
         });
       } 
     });
   });
 
-  //för att skapa en ny transaction och köra in i transactions-tabellen i db
+  //för att skapa en ny transaction och posta in i transactions-tabellen i db
   $("#transferBtn").click(function(e) {
     console.log("transferBtn klickades");
     e.preventDefault();
@@ -42,14 +44,44 @@ document.addEventListener("DOMContentLoaded", function () {
     $.ajax({
       type: 'POST',
       dataType: "json",
-      url: 'http://localhost:8888/webb19-bank/public/api/createTransactions.php',
+      url: 'http://localhost:8888/assignment-3-for-php1/public/api/createTransactions.php',
       data: JSON.stringify(data),
-      success: function(parr) {
+      success: function(parr) { //den går aldrig in här????
         console.log("post SUCCESS");
         console.log(parr);
+        // $("#transMessage").empty();
+        // $("#transMessage").append(`<p>"Transaktionen gick fint!"</p>`);
+        
       },
       error: function(parr) {
         console.error(parr);
+        // $("#transMessage").empty();
+        // $("#transMessage").append(`<p>"Nåt gick galet med överföringen!"</p>`);
+      } 
+    });
+
+    $("#transMessage").empty();
+    $("#transMessage").append(`<br><p>"Transaktionen gick fint!"</p>`);
+
+    //denna är enbart för att uppdatera balance när man har gjort en transaction
+    $.ajax({
+      url: 'http://localhost:8888/assignment-3-for-php1/public/api/readUsers.php',
+      success: function(parr) {
+        console.log("SUCCESS get balance");
+        
+        var userObj;
+        var userObjArray = [];
+        
+        //denna funktionen loopar igenom alla users
+        for (let i = 0; i < parr.data.length; i++) {
+          userObj = parr.data[i];
+          userObjArray[userObj.account_id] = userObj;
+        }
+
+        let person = document.querySelector('#personInput').value;
+        userObj = userObjArray[person];
+        $("#balanceOutput").empty();
+        $("#balanceOutput").append(`<p>${userObj.balance} SEK</p>`);
       } 
     });
   });

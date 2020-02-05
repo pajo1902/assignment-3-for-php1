@@ -45,19 +45,8 @@
         <label for="amountInput">Belopp:</label>
         <input type="number" class="form-control" id="amountInput">
         <button type="submit" class="btn btn-dark" id="transferBtn">Överför</button>
+        <div id="transMessage"></div>
     </form>
-
-    <button id="transBtn">Få fram alla transactions</button>
-
-    <table id="transactionsDiv">
-        <tr>
-            <th>transaction_id</th>
-            <th>from_amount</th>
-            <th>from_account</th>
-            <th>to_amount</th>
-            <th>to_account</th>
-        </tr>
-    </table>
 
     <script src="scripts/main.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
