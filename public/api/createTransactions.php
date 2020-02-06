@@ -11,7 +11,7 @@
     $json_data = file_get_contents('php://input');
 
     $data_obj = json_decode($json_data, true); //här decodar jag datan från json till ett php-objekt
-    echo $data_obj['from_account']; //här kan jag plocka ut vad jag behöver ifrån datan som skickades
+    //echo $data_obj['from_account']; //här kan jag plocka ut vad jag behöver ifrån datan som skickades
 
     //database connection and user object
     $database = new DB();
@@ -43,15 +43,3 @@ switch ($requestMethod) {
     default:
         break;
 }
-
-    // query transactions
-    // $stmt = $transaction->create();
-
-
-
-    // $num = $stmt->rowCount();
- 
-    // // check if more than 0 record found
-    // if ($num > 0) {
-
-    // };

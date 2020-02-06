@@ -49,6 +49,7 @@ document.addEventListener("DOMContentLoaded", function () {
       success: function(parr) { //den går aldrig in här????
         console.log("post SUCCESS");
         console.log(parr);
+        //ssuccess kanske heter nåt annat?
         // $("#transMessage").empty();
         // $("#transMessage").append(`<p>"Transaktionen gick fint!"</p>`);
         
@@ -61,7 +62,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     $("#transMessage").empty();
-    $("#transMessage").append(`<br><p>"Transaktionen gick fint!"</p>`);
+    $("#transMessage").append(`<br><p>"Transaktionen gick fint!"</p>`); //denna borde ligga under success på post-anropet
 
     //denna är enbart för att uppdatera balance när man har gjort en transaction
     $.ajax({

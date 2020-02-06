@@ -58,17 +58,22 @@ class Transaction {
         try {
             // select all query
             $query = "INSERT INTO transactions (from_amount, from_account, to_amount, to_account)
-            VALUES ($this->from_amount, $this->from_account, $this->to_amount, $this->to_account)";
-
+            VALUES (:from_amount, $this->from_amount, $this->from_account, $this->to_amount, $this->to_account)";
+        //byt ut till bindValue()
             // prepare query statement
             $stmt = $this->conn->prepare($query); //kolla upp
 
             // execute query
             $stmt->execute();
 
+
+            //här kollar jag om jag får ut nåt ifrån db
             $status = $stmt->rowCount();
 
+            //returnerar statuskoden
             return $status;
+        
+        //om försöket att executa queryn misslyckades fånga då upp the exception och stoppa koden 
         } catch (Exception $e) {
             die("The query doesnt work");
         }
