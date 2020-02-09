@@ -1,5 +1,5 @@
 <?php 
-    include_once './classes/users.php';
+    include_once './classes/user.php';
     include_once './classes/db.php';
 
     // required headers

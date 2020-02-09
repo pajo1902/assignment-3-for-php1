@@ -2,7 +2,7 @@
 
     //ANVÄNDS EJ, var skapad för test
 
-    include_once './classes/transactions.php';
+    include_once './classes/transaction.php';
     include_once './classes/db.php';
 
     // required headers

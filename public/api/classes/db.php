@@ -1,5 +1,9 @@
 <?php
 
+// require_once '../../../vendor/autoload.php';
+
+// \Dotenv\Dotenv::createImmutable('../../../')->load();
+
 class DB
 {
     // private $server;
@@ -12,12 +16,21 @@ class DB
 
     public function connect()
     {
-        $this->server = "127.0.0.1";
-        $this->socket = "/Applications/MAMP/tmp/mysql/mysql.sock";
-        $this->user = "root";
-        $this->pass = "root";
-        $this->dbname = "bank";
-        // $this->charset = "utf8mb4";
+        
+        $this->socket = '/Applications/MAMP/tmp/mysql/mysql.sock';
+        $this->user = 'root';
+        $this->pass = 'root';
+        $this->dbname = 'bank';
+
+        // $this->socket = $_ENV["DB_SOCKET"];
+        // $this->user = $_ENV["DB_USER"];
+        // $this->pass = $_ENV["DB_PASS"];
+        // $this->dbname = $_ENV["DB_DATABASE"];
+        
+    // DB_SOCKET="/Applications/MAMP/tmp/mysql/mysql.sock"
+    // DB_USER="root"
+    // DB_PASS="root"
+    // DB_DATABASE="bank"
 
         $this->conn = null;
 
@@ -30,4 +43,5 @@ class DB
  
         return $this->conn;
     }
+    
 }
