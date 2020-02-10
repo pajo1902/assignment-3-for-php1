@@ -1,8 +1,9 @@
 <?php
 
-// require_once '../../../vendor/autoload.php';
+//använder mig av autoloadern för att ladda in .env
+require_once '../../vendor/autoload.php';
 
-// \Dotenv\Dotenv::createImmutable('../../../')->load();
+\Dotenv\Dotenv::createImmutable('../../')->load();
 
 class DB
 {
@@ -17,15 +18,15 @@ class DB
     public function connect()
     {
         
-        $this->socket = '/Applications/MAMP/tmp/mysql/mysql.sock';
-        $this->user = 'root';
-        $this->pass = 'root';
-        $this->dbname = 'bank';
+        // $this->socket = '/Applications/MAMP/tmp/mysql/mysql.sock';
+        // $this->user = 'root';
+        // $this->pass = 'root';
+        // $this->dbname = 'bank';
 
-        // $this->socket = $_ENV["DB_SOCKET"];
-        // $this->user = $_ENV["DB_USER"];
-        // $this->pass = $_ENV["DB_PASS"];
-        // $this->dbname = $_ENV["DB_DATABASE"];
+        $this->socket = getenv('DB_SOCKET');
+        $this->user = getenv('DB_USER');
+        $this->pass = getenv('DB_PASS');
+        $this->dbname = getenv('DB_DATABASE');
         
     // DB_SOCKET="/Applications/MAMP/tmp/mysql/mysql.sock"
     // DB_USER="root"
