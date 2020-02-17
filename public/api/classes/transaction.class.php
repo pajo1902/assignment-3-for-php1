@@ -1,7 +1,5 @@
 <?php
 
-// include_once 
-
 class Transaction {
 
     private $conn;
@@ -15,20 +13,13 @@ class Transaction {
     public function __construct($db)
     {
         $this->conn = $db;
-        // $this->test = $test;
     }
 
     // read transactions
     public function read()
     {
-
-        // select all query
         $query = 'SELECT transaction_id, from_amount, from_account, to_amount, to_account FROM transactions';
-
-        // prepare query statement
         $stmt = $this->conn->prepare($query);
-
-        // execute query
         $stmt->execute();
 
         return $stmt;
@@ -64,9 +55,9 @@ class Transaction {
             // select all query
             $query = "INSERT INTO transactions (from_amount, from_account, to_amount, to_account)
             VALUES (:fromAmount, :fromAccount, :toAmount, :toAccount)";
-        //byt ut till bindValue() (tex :from_amount)
+
             // prepare query statement
-            $stmt = $this->conn->prepare($query); //kolla upp
+            $stmt = $this->conn->prepare($query);
             $stmt->bindParam(':fromAmount', $this->from_amount);
             $stmt->bindParam(':fromAccount', $this->from_account);
             $stmt->bindParam(':toAmount', $this->to_amount);
@@ -87,12 +78,12 @@ class Transaction {
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(':account', $this->from_account);
         $stmt->execute();
-    
         $data = $stmt->fetchAll();
 
         return $data[0]["balance"];
     }
 
+    //check if balance is less than amount or smaller than zero
     public function checkBalance($balance, $amount) {
         if ($balance < $amount || $balance < 0) {
             throw new \Exception("Det är för lite pengar på ditt konto!");

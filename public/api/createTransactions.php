@@ -1,24 +1,21 @@
 <?php
-     // required headers
      header("Access-Control-Allow-Origin: *");
      header("Content-Type: application/json; charset=UTF-8");
 
-    include_once './classes/transaction.php';
-    include_once './classes/db.php';
+    //includes all files with "classes" in the name automatically
+    include 'includes/autoloader.inc.php';
 
-    $requestMethod = $_SERVER["REQUEST_METHOD"]; //to identify what request
+    //to identify what request
+    $requestMethod = $_SERVER["REQUEST_METHOD"];
 
     $json_data = file_get_contents('php://input');
 
-    $data_obj = json_decode($json_data, true); //här decodar jag datan från json till ett php-objekt
-    echo $data_obj['from_account']; //här kan jag plocka ut vad jag behöver ifrån datan som skickades
+    //här decodar jag datan från json till ett php-objekt
+    $data_obj = json_decode($json_data, true);
 
-    //database connection and user object
     $database = new DB();
     $db = $database->connect();
- 
-    // $test = 4;
-    // initialize object
+
     $transaction = new Transaction($db);
     
 switch ($requestMethod) {
@@ -34,16 +31,16 @@ switch ($requestMethod) {
         $transaction->setToAccount($to_account);
 
         try {
-            if ($transInfo = $transaction->create($transaction->getBalance($from_account), $to_amount)) {
+            if ($tryTransaction = $transaction->create($transaction->getBalance($from_account), $to_amount)) {
                 echo ("Transaction was succesfull");
-                return $transInfo;
+                return $tryTransaction;
             }
         } catch (Exception $err) {
             echo 'Message:' . $err->getMessage();
         }
         
         //felhantering
-        if (!empty($transInfo)) {
+        if (!empty($tryTransaction)) {
             $js_encode = json_encode(array('status'=>true, 'message'=>'Transaction was Successfully'), true);
         } else {
             $js_encode = json_encode(array('status'=>false, 'message'=>'Transaction failed.'), true);
@@ -51,6 +48,7 @@ switch ($requestMethod) {
         header('Content-Type: application/json');
         echo $js_encode;
         break;
+        
     default:
         break;
 }

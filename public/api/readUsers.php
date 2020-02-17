@@ -1,10 +1,9 @@
-<?php 
-    include_once './classes/user.php';
-    include_once './classes/db.php';
-
-    // required headers
+<?php
     header("Access-Control-Allow-Origin: *");
     header("Content-Type: application/json; charset=UTF-8");
+
+    //includes all files with "classes" in the name automatically
+    include 'includes/autoloader.inc.php';
 
     //database connection and user object
     $database = new DB();

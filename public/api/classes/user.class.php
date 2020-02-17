@@ -1,7 +1,5 @@
 <?php
 
-// include_once 'db.php';
-
 class User {
 
     private $conn;
@@ -19,14 +17,8 @@ class User {
 
     // read users
     public function read(){
- 
-        // select all query
         $query = 'SELECT id, firstname, lastname, username, balance, account_id FROM vw_users';
-
-        // prepare query statement
         $stmt = $this->conn->prepare($query);
- 
-        // execute query
         $stmt->execute();
  
         return $stmt;

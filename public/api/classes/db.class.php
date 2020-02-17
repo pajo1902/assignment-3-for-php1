@@ -1,9 +1,11 @@
 <?php
 
-//använder mig av autoloadern för att ladda in .env
-require_once '../../vendor/autoload.php';
+// namespace classes;
 
-\Dotenv\Dotenv::createImmutable('../../')->load();
+// använder mig av autoloadern för att ladda in .env
+require_once '../../vendor/autoload.php'; //här har jag ändrat
+
+\Dotenv\Dotenv::createImmutable('../../')->load(); //här har jag ändrat
 
 class DB
 {
@@ -38,6 +40,7 @@ class DB
         try{
             $this->conn = new PDO("mysql:unix_socket=" . $this->socket . ";dbname=" . $this->dbname, $this->user, $this->pass);
             $this->conn->exec("set names utf8");
+            // echo "hej!";
         }catch(PDOException $exception){
             echo "Connection error: " . $exception->getMessage();
         }
